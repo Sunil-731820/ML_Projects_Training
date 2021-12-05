@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+x = np.linspace(2,15,20).reshape(-1,1)
+print("the value of the x is ")
+print(x)
+y = (x*x-x)
+print("the value of the y is")
+print(y)
+print("the given graphs are ")
+plt.scatter(x,y,color="green",marker="*")
+plt.show()
+'''Now first i am using the simple linear regressions after that i will use the Poly regressions '''
+from sklearn.linear_model import LinearRegression
+model_slr = LinearRegression()
+model_slr.fit(x,y)
+predict_y = model_slr.predict(x)
+plt.scatter(x,y,color="green")
+plt.plot(x,predict_y,color="red")
+plt.show()
+from sklearn.preprocessing import PolynomialFeatures
+model_pr = PolynomialFeatures()
+new_x = model_pr.fit_transform(x)
+print("after transformations of the values is ")
+print(new_x)
+model_slr.fit(new_x,y)
+predict_y1 = model_slr.predict(new_x)
+print("after the predictions of the values is ")
+print(predict_y1)
+print("ploting the graphs for the new data is ")
+plt.scatter(x,y)
+plt.plot(x,predict_y1)
+plt.show()

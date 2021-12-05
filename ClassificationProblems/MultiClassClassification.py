@@ -1,0 +1,38 @@
+from sklearn.datasets import load_digits
+digit = load_digits()
+print(digit)
+print('DESCR')
+print(dir(digit))
+print("the use of the targets_names attributes ")
+print(digit.target_names)
+print("the use of the target")
+print(digit.target)
+print("the first data parts using slicing in pandas ")
+print(digit.data.shape)
+print(digit.images.shape)
+import matplotlib.pyplot as plt
+for i in range(5):
+    plt.matshow(digit.images[i])
+plt.matshow(digit.images[567])
+plt.show()
+print(digit.target[567])
+print(digit.feature_names)
+from sklearn.model_selection import train_test_split
+train_x,test_x,train_y,test_y = train_test_split(digit.data,digit.target,test_size=0.3)
+print("the length of the train_x is ")
+print(len(train_x))
+print("the length of the test_x is ")
+print(len(test_x))
+from sklearn.linear_model import LogisticRegression
+import warnings
+warnings.filterwarnings("ignore")
+model = LogisticRegression(solver="saga")
+model.fit(train_x,train_y)
+print(model.predict(test_x[2:5]))
+print(test_y[2:5])
+print(model.predict([digit.data[789]]))
+print(digit.target[789])
+plt.matshow(digit.images[789])
+plt.show()
+print("the accuracy of the model is ")
+print(model.score(test_x,test_y))
